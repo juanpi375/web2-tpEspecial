@@ -1,5 +1,8 @@
 <?php
     require_once('controllers/productsController.php');
+    require_once('controllers/modelsController.php');
+
+    define('URL', "http://".$_SERVER['SERVER_NAME'].$_SERVER['SERVER_PORT'].dirname($_SERVER['PHP_SELF'])."/");
 
     $action = $_GET['action'];
     $prodController = new ProductsController();
@@ -42,9 +45,10 @@
     
                 // ----------------------------------------------------------
             }
-            else{
+            elseif(isset($action[0])&&$action[0]!=null){
                 $prodController->commandProduct($thisAction[0]);
             }
+            // WHERE DOES THIS GO???????????????????????
         }
     
         // NOTES:

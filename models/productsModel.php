@@ -5,15 +5,27 @@
             $this->model = new PDO('mysql:host=localhost;dbname=electrocom;charset=utf8', 'root', '');
         }
 
+        // public function getProducts(){
+        //     $ask = $this->model->prepare('SELECT producto.nombre, modelo.nombre_m, modelo.descripcion FROM producto JOIN modelo ON producto.id_producto = modelo.id_producto');
+        //     $ok = $ask->execute();
+        //     if(!$ok){
+        //         var_dump($ask->errorInfo());
+        //         die();
+        //     }
+        //     $aaa = $ask->fetchAll(PDO::FETCH_OBJ);
+        //     return $aaa;
+        // }
+
+        // !!!This is duplicated!!!
         public function getProducts(){
-            $ask = $this->model->prepare('SELECT producto.nombre, modelo.nombre_m, modelo.descripcion FROM producto JOIN modelo ON producto.id_producto = modelo.id_producto');
+            $ask = $this->model->prepare('SELECT * FROM producto');
             $ok = $ask->execute();
             if(!$ok){
                 var_dump($ask->errorInfo());
                 die();
             }
-            $aaa = $ask->fetchAll(PDO::FETCH_OBJ);
-            return $aaa;
+            $response = $ask->fetchAll(PDO::FETCH_OBJ);
+            return $response;
         }
 
         // ----------------------------------------------

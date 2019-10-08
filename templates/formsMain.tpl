@@ -2,9 +2,10 @@
     <h3>Seleccione un producto a editar..</h3>
     {* <h3>Editar </h3> *}
     <select name="p_selected" id="P_selected">
-        {foreach from=$modArray item=model}
-            <option value="{$model}">{$model}</option>
-            {* Like this? *}
+        {foreach from=$prodArray item=prod}  
+            <option value="{$prod->nombre}">
+            {$prod->nombre}
+            </option>
         {/foreach}
     </select>
     <label for="P_name">Nombre:</label>

@@ -1,8 +1,8 @@
 <?php
-    class ModelsModels{
+    class ModelsModel{
         private $model;
         public function __construct(){
-            $this->model = new PDO('host:mysql=localhost;dbname=modelo;charset=utf8', 'root', '');
+            $this->model = new PDO('mysql:host=localhost;dbname=electrocom;charset=utf8', 'root', '');
         }
 
         public function getModels(){
@@ -14,6 +14,15 @@
             }
             $response = $ask->fetchAll(PDO::FETCH_OBJ);
             return $response;
+        }
+
+        public function getSpecificModels($prod){
+
+        }
+
+        public function getModel($mod)
+        {
+            # code...
         }
 
         public function addModel($mod){

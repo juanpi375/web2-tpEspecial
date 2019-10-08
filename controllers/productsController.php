@@ -5,58 +5,70 @@
     // require_once('./views');
 
     class ProductsController{
-        private $model;
+        private $pModel;
+        private $mModel;
         private $view;
 
         public function __construct(){
-            $this->model = new ProductsModel();
+            $this->pModel = new ProductsModel();
+            $this->mModel = new ModelsModel();
             $this->view = new ProductsView();
         }
 
         public function commandProducts(){
-            $products = $this->model->getProducts();
-            $this->view->showProducts($products);
+            $products = $this->pModel->getProducts();
+            $models = $this->mModel->getModels();
+            
+            $this->view->showProducts($products, $models);
         }
+        // This mustn't change ^
+
+        // ----------------------------------------------
+        // public function commandModels(){
+        // }
+        // ----------------------------------------------
 
         public function commandProduct($prod_name){
-            $product = $this->model->findProduct($prod_name);
-            $products = $this->model->getProduct($product);
-            $this->view->showProducts($products);
+            $product = $this->pModel->findProduct($prod_name);
+            $productFound = $this->pModel->getProduct($product);
+            $models = $this->mModel->getSpecificModels($productFound);
+
+            $this->view->showProducts($productFound, $models);
         }
 
-        public function commandAddProduct(){
-            addProduct
-        }
+        // public function commandAddProduct(){
+        //     addProduct
+        // }
 
-        public function commandEditProduct(){
-            editProduct
-        }
+        // public function commandEditProduct(){
+        //     editProduct
+        // }
 
-        public function commandDelProduct(){
-            delProduct
-        }
+        // public function commandDelProduct(){
+        //     delProduct
+        // }
 
-        // This must be here because it's not the phone's models
-        // responsability to know about the other models.
-        // This is an extra form.
-        public function commandAddModel(){
-            $m_name = $_POST['m_name'];
-            $m_description = $_POST['m_description'];
-            $m_photo = $_POST['m_photo'];
-            $modToTest = $this->mModel->getModels();
+        // // This must be here because it's not the phone's models
+        // // responsability to know about the other models.
+        // // This is an extra form.
+        // public function commandAddModel(){
+        //     $m_name = $_POST['m_name'];
+        //     $m_description = $_POST['m_description'];
+        //     $m_photo = $_POST['m_photo'];
+        //     $modToTest = $this->mModel->getModels();
 
-            $i = false;
-            foreach ($modToTest as $mtt){
-                if(!$mtt->m_nombre == $m_name){
-                    $i = true;
-                }
-            }
-            if($i){
-                $this->mModel->addModel(array($m_name, $m_description, $m_photo));
-            }
+        //     $i = false;
+        //     foreach ($modToTest as $mtt){
+        //         if(!$mtt->m_nombre == $m_name){
+        //             $i = true;
+        //         }
+        //     }
+        //     if($i){
+        //         $this->mModel->addModel(array($m_name, $m_description, $m_photo));
+        //     }
 
-            commandProducts();
-        }
+        //     commandProducts();
+        // }
     }
         
 

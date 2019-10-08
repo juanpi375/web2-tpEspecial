@@ -8,7 +8,7 @@
 
         public function __construct(){
             $this->model = new ModelsModel();
-            $this->view = new ModelsView();
+            // $this->view = new ModelsView();
         }
 
         public function commandModel($mod){
