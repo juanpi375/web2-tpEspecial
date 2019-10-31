@@ -1,6 +1,8 @@
 <?php
     require_once('./models/productsModel.php');
     require_once('./views/productsView.php');
+    require_once('usersController.php');
+
     // require_once('../models');
     // require_once('./views');
 
@@ -8,18 +10,43 @@
         private $pModel;
         private $mModel;
         private $view;
+        private $user;
 
         public function __construct(){
             $this->pModel = new ProductsModel();
             $this->mModel = new ModelsModel();
             $this->view = new ProductsView();
+            $this->user = new UsersController();
+
+            // Some function for user verification here
+            // userVerify();
+
         }
+
+        // private function checkAdmin(){
+        //     if(!$this->user->isAdmin()){
+        //         header("Location: ".URL);
+        //         die();
+        //     }
+        // }
+
+        public function checkAdmin(){
+            session_start();
+            return($this->user->isAdmin());
+        }
+
+        // public function checkUser(){
+        //     if(!$this->userKind){
+        //         die();
+        //     }
+        // }
 
         public function commandProducts(){
             $products = $this->pModel->getProducts();
             $models = $this->mModel->getModels();
-            
-            $this->view->showProducts($products, $models);
+            $isAdmin = $this->checkAdmin();
+
+            $this->view->showProducts($products, $models, $isAdmin);
         }
         // This mustn't change ^
 
@@ -28,25 +55,53 @@
         // }
         // ----------------------------------------------
 
+
         public function commandProduct($prod_name){
             $product = $this->pModel->findProduct($prod_name);
-            $productFound = $this->pModel->getProduct($product);
-            $models = $this->mModel->getSpecificModels($productFound);
-
-            $this->view->showProducts($productFound, $models);
+            if($product!=null){
+                $productFound = $this->pModel->getProduct($product);
+                $models = $this->mModel->getSpecificModels($productFound);
+                // This operation of models in products controller is
+                // justified because models model refers just to what 
+                // a model shows and not to how the array of them are.
+                
+                $this->view->showProducts($productFound, $models, 
+                $this->checkAdmin());
+            }
+            else{
+                header('Location: '.URL);
+            }
         }
 
         // public function commandAddProduct(){
         //     addProduct
         // }
 
-        // public function commandEditProduct(){
-        //     editProduct
-        // }
+        public function commandEditProduct(){
+            $this->checkAdmin();
+            if(isset($_POST['p_selected'])
+            &&isset($_POST['p_name'])){
+                $pId = $_POST['p_selected'];
+                $newName = $_POST['p_name'];
+                $this->pModel->editProduct($pId, $newName);
+                header("Location: ".URL);
+            }
+        }
 
-        // public function commandDelProduct(){
-        //     delProduct
-        // }
+        public function commandAddProduct(){
+            $this->checkAdmin();
+            if(isset($_POST['p_name'])){
+                $newName = $_POST['p_name'];
+                $this->pModel->addProduct($newName);
+                header("Location: ".URL);
+            }
+        }
+
+        public function commandDelProduct($pId){
+            $this->checkAdmin();
+            $this->pModel->delProduct($pId);
+            header("Location: ".URL);
+        }
 
         // // This must be here because it's not the phone's models
         // // responsability to know about the other models.

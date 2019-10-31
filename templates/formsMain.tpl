@@ -1,9 +1,9 @@
-<form action="editProduct" method="POST">
+<form action="editProd" method="POST">
     <h3>Seleccione un producto a editar..</h3>
     {* <h3>Editar </h3> *}
     <select name="p_selected" id="P_selected">
         {foreach from=$prodArray item=prod}  
-            <option value="{$prod->nombre}">
+            <option value="{$prod->id_producto}">
             {$prod->nombre}
             </option>
         {/foreach}
@@ -13,20 +13,25 @@
     <input type="submit" value="Guardar">
 </form> 
 
-<form action="addProduct" method="POST">
+
+
+
+<form action="addProd" method="POST">
     <h3>Agregar un nuevo producto..</h3>
     <label for="P_name">Nombre:</label>
     <input type="text" name="p_name" id="P_name">
     <input type="submit" value="Agregar">
 </form>
 
-<form action="addModel" method="POST">
+
+
+
+<form action="addModel" method="POST" enctype="multipart/form-data">
     <h3>Agregar un nuevo modelo..</h3>
     <label for="P_selection"></label>
     <select name="p_selection" id="P_selection">
         {foreach from=$prodArray item=prod}
-            <option value="{$prod->nombre}">{$prod->nombre}</option>
-            {* Like this? *}
+            <option value="{$prod->id_producto}">{$prod->nombre}</option>
         {/foreach}
     </select>
     <label for="M_name">Nombre:</label>
