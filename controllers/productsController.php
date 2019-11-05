@@ -78,31 +78,41 @@
         // }
 
         public function commandEditProduct(){
-            $this->checkAdmin();
-            if(isset($_POST['p_selected'])
-            &&isset($_POST['p_name'])){
-                $pId = $_POST['p_selected'];
-                $newName = $_POST['p_name'];
-                $this->pModel->editProduct($pId, $newName);
-                header("Location: ".URL);
+            if($this->checkAdmin()){
+            // $this-> checkAdmin();
+            // echo "im in";
+            // die();
+            // else
+                if(isset($_POST['p_selected'])
+                &&isset($_POST['p_name'])){
+                    $pId = $_POST['p_selected'];
+                    $newName = $_POST['p_name'];
+                    $this->pModel->editProduct($pId, $newName);
+                }
             }
-        }
-
-        public function commandAddProduct(){
-            $this->checkAdmin();
-            if(isset($_POST['p_name'])){
-                $newName = $_POST['p_name'];
-                $this->pModel->addProduct($newName);
-                header("Location: ".URL);
-            }
-        }
-
-        public function commandDelProduct($pId){
-            $this->checkAdmin();
-            $this->pModel->delProduct($pId);
+            // echo "im not in";
+            // die();
             header("Location: ".URL);
         }
 
+        public function commandAddProduct(){
+            if($this->checkAdmin()){
+                if(isset($_POST['p_name'])){
+                    $newName = $_POST['p_name'];
+                    $this->pModel->addProduct($newName);
+                }
+            }
+            header("Location: ".URL);
+        }
+
+        public function commandDelProduct($pId){
+            if($this->checkAdmin()){
+                $this->pModel->delProduct($pId);
+            }
+            header("Location: ".URL);
+        }
+        
+    }
         // // This must be here because it's not the phone's models
         // // responsability to know about the other models.
         // // This is an extra form.
@@ -124,7 +134,6 @@
 
         //     commandProducts();
         // }
-    }
         
 
         // public function commandProduct($prod_id){
