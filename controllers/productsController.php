@@ -55,8 +55,30 @@
         // }
         // ----------------------------------------------
 
-
-        public function commandProduct($prod_name){
+        // OLD WAY
+        // public function commandProduct($prod_name){
+        //     $product = $this->pModel->findProduct($prod_name);
+        //     if($product!=null){
+        //         $productFound = $this->pModel->getProduct($product);
+        //         $models = $this->mModel->getSpecificModels($productFound);
+        //         // This operation of models in products controller is
+        //         // justified because models model refers just to what 
+        //         // a model shows and not to how the array of them are.
+                
+        //         $this->view->showProducts($productFound, $models, 
+        //         $this->checkAdmin());
+        //     }
+        //     else{
+        //         header('Location: '.URL);
+        //     }
+        // }
+        // NEW WAY
+        public function commandProduct($params = null){
+            $prod_name = $params[':PRODUCT'];
+            if($prod_name == ''){
+                $this->commandProducts();
+                die();
+            }
             $product = $this->pModel->findProduct($prod_name);
             if($product!=null){
                 $productFound = $this->pModel->getProduct($product);
@@ -105,7 +127,8 @@
             header("Location: ".URL);
         }
 
-        public function commandDelProduct($pId){
+        public function commandDelProduct($params = null){
+            $pId = $params[':PRODUCT'];
             if($this->checkAdmin()){
                 $this->pModel->delProduct($pId);
             }
@@ -113,55 +136,4 @@
         }
         
     }
-        // // This must be here because it's not the phone's models
-        // // responsability to know about the other models.
-        // // This is an extra form.
-        // public function commandAddModel(){
-        //     $m_name = $_POST['m_name'];
-        //     $m_description = $_POST['m_description'];
-        //     $m_photo = $_POST['m_photo'];
-        //     $modToTest = $this->mModel->getModels();
-
-        //     $i = false;
-        //     foreach ($modToTest as $mtt){
-        //         if(!$mtt->m_nombre == $m_name){
-        //             $i = true;
-        //         }
-        //     }
-        //     if($i){
-        //         $this->mModel->addModel(array($m_name, $m_description, $m_photo));
-        //     }
-
-        //     commandProducts();
-        // }
-        
-
-        // public function commandProduct($prod_id){
-        //     $product = $this->model->getProduct($prod_id);
-        //     $this->view->showProducts(array($product));
-        // }
-        // WRONG: we do not use an id anymore - we need a name
-
-        // public function commandSmartphones(){
-        //     $models = $this->model->getSmartphones();
-        //     $this->view->showItem();
-        // } 
-
-        // public function commandProducts($prods){
-        //     switch ($prods) {
-        //         case 'smartphones':
-        //             $products = $this->model->getSmartphones();
-        //             break;
-        //         case 'laptops':
-        //             $products = $this->model->getLaptops();
-        //             break;
-        //         case 'tablets':
-        //             $products = $this->model->getTablets();
-        //             break;
-        //     }
-        //     $this->view->displayProducts();
-        // }
-
-        // public function setProductTitle(){
-
-        // }
+      

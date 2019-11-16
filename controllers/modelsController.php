@@ -22,11 +22,30 @@
             return($this->user->isUser());
         }
 
-        public function commandModel($mod, $prodName){
-            if(!$this->checkUser()){
-                header("Location: ".URL."login");
-                die();
-            }        
+        // public function commandModel($mod, $prodName){
+        //     if(!$this->checkUser()){
+        //         header("Location: ".URL."login");
+        //         die();
+        //     }        
+        //     $selectedModel = $this->model->getModel($mod);
+        //     if($selectedModel!=null){
+        //         $this->view->showModel($selectedModel, $prodName,
+        //         $this->user->isAdmin());
+        //         // Views must know who the user is.
+        //     }
+        //     else{
+        //         header('Location: '.URL);
+        //     }
+        // }
+        public function commandModel($params = null){
+            // if(!$this->checkUser()){
+            //     header("Location: ".URL."login");
+            //     die();
+            // }
+            // Now, visitors are allowed to see models 
+            // with its comments
+            $mod = $params[':MODEL'];
+            $prodName = $params[':PRODUCT'];
             $selectedModel = $this->model->getModel($mod);
             if($selectedModel!=null){
                 $this->view->showModel($selectedModel, $prodName,
@@ -38,15 +57,20 @@
             }
         }
 
-        private function checkAdmin(){
+        public function checkAdmin(){
             session_start();
             if(!$this->user->isAdmin()){
                 header("Location: ".URL);
                 die();
             }
+            else{
+                return true;
+            }
         }
 
         public function commandAddModel(){
+            // var_dump ($this->checkAdmin());
+            // die();
             if($this->checkAdmin()){
                 if ($_POST['p_selection']!=''
                 &&$_POST['m_name']!=''
@@ -63,10 +87,15 @@
             header("Location: ".URL);
         }
 
-        public function commandEditModel($prodName, $modId, $modName, $mPhoto){
+        public function commandEditModel($params = null){
+            // echo "j"; die;
+            $prodName = $params[':PRODUCT'];
+            $modId = $params[':MODELID'];
+            $modName = $params[':MODEL'];
+            $modPhoto = $params[':PHOTO'];
             if($this->checkAdmin()){
                 if (($_POST['m_name']!='') && ($_POST['m_description']!='') && ($_FILES['m_photo']!='')) {
-                    unlink("./././././images/".$mPhoto);
+                    unlink("./././././images/".$modPhoto);
                     move_uploaded_file($_FILES['m_photo']['tmp_name'], "./images/".$_FILES['m_photo']['name']);
                     // First parameter is the actual direction of the file,
                     // second is its new direction. Notice that PHP uses only 
@@ -90,7 +119,9 @@
             header("Location: ".URL.$prodName."/".$modName);
         }
 
-        public function commandDelModel($mId, $mPhoto){
+        public function commandDelModel($params = null){
+            $mId = $params[':MODELID'];
+            $mPhoto = $params[':PHOTO'];
             if($this->checkAdmin()){
                 unlink("./././images/".$mPhoto);
                 // How to delete the photo?? 0.0

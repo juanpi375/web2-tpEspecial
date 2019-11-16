@@ -16,15 +16,22 @@
             </h1>
             <span style="width: 20vw; display: inline-block; margin-left: 55vw">
                 <h4>
-            <a href="{$URL}login">
-                    página de login
-                {* </h4> *}
-            </a>
-            /
-            <a href="{$URL}signUp">
-                {* <h4> *}
-                    registrarse
-            </a>
+                    {if isset($smarty.session.user_name)}
+                        <span>{$smarty.session.user_name}</span>
+                        /
+                        <a href="{$URL}login">
+                            salir
+                        </a>
+                    {else}
+                        <a href="{$URL}login">
+                            página de login
+                        </a>
+                        /
+                         <a href="{$URL}signUp">
+                        {* <h4> *}
+                            registrarse
+                        </a>
+                    {/if}
                 </h4>
             </span>
             {* It lacks a bar (/) followed of the link for signing up *}

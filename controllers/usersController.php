@@ -45,7 +45,10 @@
         }
 
         public function commandShowLogin(){
+
             $this->logOut();
+            // echo "yeah";
+            // die;
             $this->view->showLogin(0);
             // This 0 means there are no errors in the login
         }
@@ -109,7 +112,10 @@
 
         public function logOut(){
             session_start();
+            // echo session_destroy(); die;
             session_destroy();
+            $_SESSION['user_name'] = null;
+            // echo $_SESSION['user_name']; die;
             // header("Location: ".URL);
         }
     }

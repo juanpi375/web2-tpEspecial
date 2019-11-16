@@ -1,4 +1,4 @@
-<form action="editModel/{$prodNombre}/{$mod->id_modelo}/{$mod->nombre_m}/{$mod->foto}" method="POST" enctype="multipart/form-data">
+<form action="{$URL}editModel/{$prodNombre}/{$mod->id_modelo}/{$mod->nombre_m}/{$mod->foto}" method="POST" enctype="multipart/form-data">
 
     <h3>Encuentra fallas en el modelo? Edítelo a continuación..</h3>
 
