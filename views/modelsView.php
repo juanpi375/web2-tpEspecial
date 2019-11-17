@@ -12,6 +12,9 @@
             $smarty->assign('prodNombre', $prodName);
             $smarty->assign('mod', $mod);
             $smarty->assign('isAdmin', $boolAdmin);
+            // if(null != $smarty->session->user_name){
+            //     $smarty->assign('userName', $smarty->session->user_name);
+            // }
             $smarty->display('./templates/showModel.tpl');
         }
     }

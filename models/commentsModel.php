@@ -16,9 +16,13 @@
             return $ask->fetchAll(PDO::FETCH_OBJ);
         }
 
-        public function addComment($comment_data){
-            $query = $this->db->prepare('INSERT INTO comentario(id_usuario, id_modelo, contenido) VALUES (?,?,?)');
-            $ok = $query->execute(array(1, $comment_data->id, $comment_data->content));
+        public function addComment($comment_data, $user_data){
+            // I have the name of the user but not its id..
+            // Shall we take its id or just pass its name??..
+            // Search user by name and get its id is a good idea
+            $query = $this->db->prepare('INSERT INTO comentario(id_usuario, id_modelo, contenido, nombre_usuario) VALUES (?,?,?,?)');
+            $ok = $query->execute(array($user_data->id_usuario, $comment_data->id,
+            $comment_data->content, $user_data->nombre));
             if(!$ok){
                 $query->errorInfo();
                 die();

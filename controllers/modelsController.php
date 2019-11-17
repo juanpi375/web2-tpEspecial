@@ -1,7 +1,7 @@
 <?php
     require_once('./models/modelsModel.php');
     require_once('./views/modelsView.php');
-    require_once('./controllers/usersController.php');
+    require_once('./controllers/loginController.php');
 
     class ModelsController{
         private $model;
@@ -12,7 +12,9 @@
         public function __construct(){
             $this->model = new ModelsModel();
             $this->view = new ModelsView();
-            $this->user = new UsersController();
+            $this->user = new LoginController();
+
+            session_start();
             // Some function for user verification here
             // userVerify();
         }

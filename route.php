@@ -83,10 +83,10 @@
 
             $r->setDefaultRoute("ProductsController", "commandProducts");
             
-            $r->addRoute("login", "GET", "UsersController", "commandShowLogin");
-            $r->addRoute("signUp", "GET", "UsersController", "commandShowSignUp");
-            $r->addRoute("tryLog", "POST", "UsersController", "logIn");
-            $r->addRoute("trySign", "POST", "UsersController", "signUp");
+            $r->addRoute("login", "GET", "LoginController", "commandShowLogin");
+            $r->addRoute("signUp", "GET", "LoginController", "commandShowSignUp");
+            $r->addRoute("tryLog", "POST", "LoginController", "logIn");
+            $r->addRoute("trySign", "POST", "LoginController", "signUp");
             $r->addRoute(":PRODUCT", "GET", "ProductsController", "commandProduct");
             $r->addRoute("delModel/:MODELID/:PHOTO", "GET", "ModelsController", "commandDelModel");
             $r->addRoute("delProd/:PRODUCT", "GET", "ProductsController", "commandDelProduct");

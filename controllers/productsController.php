@@ -1,7 +1,7 @@
 <?php
     require_once('./models/productsModel.php');
     require_once('./views/productsView.php');
-    require_once('usersController.php');
+    require_once('loginController.php');
 
     // require_once('../models');
     // require_once('./views');
@@ -16,7 +16,7 @@
             $this->pModel = new ProductsModel();
             $this->mModel = new ModelsModel();
             $this->view = new ProductsView();
-            $this->user = new UsersController();
+            $this->user = new LoginController();
 
             // Some function for user verification here
             // userVerify();

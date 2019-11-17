@@ -1,5 +1,5 @@
 <?php
-    class UsersView{
+    class LoginView{
         private $smarty;
 
         public function __construct(){

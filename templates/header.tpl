@@ -17,7 +17,7 @@
             <span style="width: 20vw; display: inline-block; margin-left: 55vw">
                 <h4>
                     {if isset($smarty.session.user_name)}
-                        <span>{$smarty.session.user_name}</span>
+                        <span id="user_name">{$smarty.session.user_name}</span>
                         /
                         <a href="{$URL}login">
                             salir
