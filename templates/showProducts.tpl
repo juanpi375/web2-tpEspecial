@@ -10,13 +10,13 @@
     </a>
 {/if}
 {foreach from=$prodArray item=prod}
-    <ul>
+    <ul class="products-list">
         {if $isAdmin}
-            <a href="{$URL}delProd/{$prod->id_producto}" style="display: inline-block">
-                <h1>x----</h1>
+            <a href="{$URL}delProd/{$prod->id_producto}" class="cross">
+                <h1>x</h1>
             </a>  
         {/if}
-        <a href="{$URL}{$prod->nombre}" style="display: inline-block">
+        <a href="{$URL}{$prod->nombre}">
             <h1>{$prod->nombre}</h1> 
         </a>
         {foreach from=$modArray item=mod}
@@ -26,11 +26,11 @@
             correspondent category *}
                 <li>
                     {if $isAdmin}
-                        <a href="{$URL}delModel/{$mod->id_modelo}/{$mod->foto}" style="display: inline-block">
-                            <h3>x----</h3>
+                        <a href="{$URL}delModel/{$mod->id_modelo}/{$mod->foto}" class="cross">
+                            <h3>x</h3>
                         </a>            
                     {/if}
-                    <a href="{$URL}{$prod->nombre}/{$mod->nombre_m}" style="display: inline-block">
+                    <a href="{$URL}{$prod->nombre}/{$mod->nombre_m}">
                         <h3>{$mod->nombre_m}</h3>
                     </a>
                 </li>

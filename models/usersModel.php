@@ -40,7 +40,7 @@
 
         public function deleteUser($id){
             $ask = $this->model->prepare('DELETE FROM usuario WHERE id_usuario = ?');
-            $ok = $ask->execute($id);
+            $ok = $ask->execute(array($id));
             if(!$ok){
                 $ask->errorInfo();
                 die();
@@ -49,10 +49,11 @@
             return $response;
         }
 
-        public function toogleAdmin($id){
+        public function toggleAdmin($id){
+            // var_dump($id); die;
             $ask = $this->model->prepare('UPDATE usuario SET es_administrador = 
             IF(es_administrador = 1,0,1) WHERE id_usuario = ?');
-            $ok = $ask->execute($id);
+            $ok = $ask->execute(array($id));
             if(!$ok){
                 $ask->errorInfo();
                 die();

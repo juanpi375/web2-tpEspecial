@@ -12,6 +12,7 @@
             $smarty->assign('prodArray', $products);
             $smarty->assign('modArray', $models);
             $smarty->assign('isAdmin', $boolAdmin);
+            // $smarty->assign('error', $error);
             $smarty->display('./templates/showProducts.tpl');
             // The template that must be called
         }

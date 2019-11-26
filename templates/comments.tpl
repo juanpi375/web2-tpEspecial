@@ -1,12 +1,19 @@
     <div class="comment-container" id="{$mod->id_modelo}">
+    <h2>
+    <span>Puntaje del modelo:</span>
+    <span id="overall-score">0</span>
+    </h2>
+            {* <h1>{{coms.length}}</h1> *}
+            {* <h1 id="overall-score"></h1> *}
         {literal}
+        
             <div id="comment-unit" v-for="com in coms">
                 <!-- <div id="{{com.id_comentario}}"> -->
                 <!-- <span>
                     {{com}}
                 </span> -->
                 <span>
-                    {{com.nombre_usuario}}: {{com.contenido}}
+                    {{com.nombre_usuario}}: {{com.contenido}}  [{{com.puntaje}}]
                 </span>
                 {/literal}
             {if $isAdmin}
@@ -19,18 +26,41 @@
             {/if}
         </div>
         <div>
-            {if isset($smarty.session.user_name)}
+            {* {if isset($smarty.session.user_name)} *}
             <!-- <div>
                 {$smarty.session.user_name}
             </div> -->
             <!-- {$aux = $smarty.session.user_name} -->
-                {literal}     
-                <form method="POST" id="comment-add"> 
-                    <label for="comment-input">Comentario:</label>
-                    <input type="text" id="comment-input" >
-                    <input type="submit" value="Enviar" v-on:click="addCom(()=>{getCom()})">
-                </form>   
+            <!-- ----------------------------------------------------------------- -->
+            <div id="filters">
+                <h4>Ordenar por: </h4>
+                <select id="comment-filter">
+                    <option value="id_comentario">Fecha</option>
+                    <option value="puntaje">Puntaje</option>
+                    <option value="nombre_usuario">Usuario</option>
+                </select> 
+                <select id="comment-filter-order">
+                    <option value="ASC">Ascendente</option>
+                    <option value="DESC">Descendente</option>
+                </select> 
+            </div>
+            {if isset($smarty.session.user_name)}
+                {literal} 
+                    <form method="POST" id="comment-add"> 
+                        <label for="comment-input">Comentario:</label>
+                        <input type="text" id="comment-input">
+                        <label for="comment-score">Puntaje:</label>
+                        <select id="comment-score">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <input type="submit" value="Enviar" v-on:click="addCom(()=>{getCom()})">
+                    </form>   
                 {/literal}
+                <!-- ------------------------------------------------------------- -->
             {/if}
         </div>
             <!-- </div> -->

@@ -1,24 +1,56 @@
 <?php
     require_once("./models/commentsModel.php");
     require_once("jsonView.php");
-    require_once("./controllers/usersController.php");
+    require_once("./models/usersModel.php");
+    // require_once("./controllers/usersController.php");
+    require_once("./controllers/loginController.php");
+
+    // define('URL', "http://".$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF'])."/");
+
 
     class ApiCommentsController {
         private $model;
         private $view;
-        private $user;
+        // private $user;
+        private $userModel;
+        private $log;
 
         public function __construct(){
             $this->model = new CommentsModel();
             $this->view = new jsonView();
-            $this->user = new UsersController();
+            // $this->user = new UsersController();
+            $this->userModel = new UsersModel();
+            $this->log = new LoginController();
             // session_start();
         }
 
+        // public function checkUser(){
+        //     session_start();
+        //     return($this->log->isUser());
+        // }
+
         public function getComments($params = null){
+            // var_dump("as");die;
             $idModel = $params[':ID'];
-            $comments = $this->model->getComments($idModel);
-            $this->view->response($comments, 200);
+            $filter = $_GET['filter'];
+            $order = $_GET['order'];
+            // if($this->checkUser()){
+                
+                // if ($_GET['order'] == 'asc' )
+                if($order != "ASC" && $order != "DESC"){
+                    // var_dump($order); die;  
+                    $order  = "ASC";
+                }
+                if($filter != "id_comentario" && $filter != "puntaje" && $filter != "nombre_usuario"){
+                    $filter = "id_comentario";
+                }
+
+                $comments = $this->model->getComments($idModel, $filter, $order);
+                $this->view->response($comments, 200);
+            // }
+            // else{
+            //     var_dump("not now"); die;
+            // }
             // The first parameter is the variable and 
             // the second the proper status
         }
@@ -37,7 +69,7 @@
             // Why $_SESSION is undefined here???
             $comment_data = json_decode(file_get_contents('php://input'));
             // var_dump($comment_data); die;
-            $userData = $this->user->findUser($comment_data->user_name);
+            $userData = $this->userModel->findUser($comment_data->user_name);
             // Finds the user in order to obtain the id..
             // If we just wanted the name that wouldn't be 
             // necessary at all.. but we may want to add other

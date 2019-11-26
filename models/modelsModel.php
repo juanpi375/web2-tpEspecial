@@ -31,8 +31,7 @@
             return $response;
         }
 
-        public function getModel($modName)
-        {
+        public function getModel($modName){
             $ask = $this->model->prepare('SELECT * FROM modelo WHERE nombre_m = ?');
             $ok = $ask->execute(array($modName));
             if(!$ok){

@@ -87,6 +87,9 @@
             $r->addRoute("signUp", "GET", "LoginController", "commandShowSignUp");
             $r->addRoute("tryLog", "POST", "LoginController", "logIn");
             $r->addRoute("trySign", "POST", "LoginController", "signUp");
+            $r->addRoute("usuarios", "GET", "UsersController", "commandUsers");
+            $r->addRoute("toggleAdmin/:ID", "GET", "UsersController", "toggleAdmin");
+            $r->addRoute("delUser/:ID", "GET", "UsersController", "deleteUser");
             $r->addRoute(":PRODUCT", "GET", "ProductsController", "commandProduct");
             $r->addRoute("delModel/:MODELID/:PHOTO", "GET", "ModelsController", "commandDelModel");
             $r->addRoute("delProd/:PRODUCT", "GET", "ProductsController", "commandDelProduct");
@@ -94,7 +97,8 @@
             $r->addRoute("addProd", "POST", "ProductsController", "commandAddProduct");
             $r->addRoute("editProd", "POST", "ProductsController", "commandEditProduct");
             $r->addRoute("editModel/:PRODUCT/:MODELID/:MODEL/:PHOTO", "POST", "ModelsController", "commandEditModel");
-            $r->addRoute(":PRODUCT/:MODEL", "GET", "ModelsController", "CommandModel");
+            $r->addRoute(":PRODUCT/:MODEL", "GET", "ModelsController", "commandModel");
+            // --------------------Add users page---------------------
 
             $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);
         

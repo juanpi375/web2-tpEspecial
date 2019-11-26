@@ -9,31 +9,40 @@
         <title>{$title}</title>
     </head>
     <body>
-        <nav style="background: #aaa">
+        <nav>
         {* Don't let this style here!!!!!!!!!!!!!!!!!!!! *}
-            <h1 style="width: 20vw; text-align: center; display: inline-block">
-                <a href="{$URL}">{$title}</a>
-            </h1>
-            <span style="width: 20vw; display: inline-block; margin-left: 55vw">
-                <h4>
-                    {if isset($smarty.session.user_name)}
-                        <span id="user_name">{$smarty.session.user_name}</span>
-                        /
-                        <a href="{$URL}login">
-                            salir
-                        </a>
-                    {else}
-                        <a href="{$URL}login">
-                            página de login
-                        </a>
-                        /
-                         <a href="{$URL}signUp">
-                        {* <h4> *}
-                            registrarse
-                        </a>
-                    {/if}
-                </h4>
-            </span>
-            {* It lacks a bar (/) followed of the link for signing up *}
-
+            <div>
+                <h1 id="nav-title">
+                    <a href="{$URL}"  class="white-link">{$title}</a>
+                </h1>
+                <span id="nav-links">
+                    <h4>
+                        {if isset($smarty.session.user_name)}
+                            <span id="user_name">{$smarty.session.user_name}</span>
+                            <a href="{$URL}login" class="nav-link white-link" >
+                                salir
+                            </a>
+                        {else}
+                            <a href="{$URL}login" class="nav-link white-link">
+                                página de login
+                            </a>
+                            <a href="{$URL}signUp" class="nav-link white-link">
+                            {* <h4> *}
+                                registrarse
+                            </a>
+                        {/if}
+                        {if $isAdmin}
+                            <a href="{$URL}usuarios" class="nav-link white-link">
+                                Usuarios
+                            </a>                   
+                        {/if}
+                    </h4>
+                </span>
+                {* It lacks a bar (/) followed of the link for signing up *}
+            </div>
         </nav>
+        <main>
+        <!-- <i src="https://www.freepik.es/iconos-gratis/triangulada-flecha-izquierda_695798.htm"></i>
+        <i></i> -->
+     <!-- <i class="icon">aa</i> -->
+     <!-- <i class="fas fa-angle-left icon"></i> -->

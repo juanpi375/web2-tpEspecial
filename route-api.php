@@ -15,7 +15,15 @@ $router = new Router();
 
 // arma la tabla de ruteo
 $router->addRoute("comments", "POST", "ApiCommentsController", "addComment");
-$router->addRoute("comments/:ID", "GET", "ApiCommentsController", "getComments");
+// $router->addRoute("comments/:ID", "GET", "ApiCommentsController", "getComments");
+$router->addRoute("models/:ID/comments", "GET", "ApiCommentsController", "getComments");
+
+// comments    comments?id_modelo=4    =>  $idModel = $_GET['id_modelo'];
+// models/:ID/comments 
+
+// ORDEN   models/:ID/comments?order=asc
+
+
 // Should add comment let you score one made by yourself??
 
 $router->addRoute("comments/:ID", "DELETE", "ApiCommentsController", "deleteComment");

@@ -3,9 +3,6 @@
     require_once('./views/productsView.php');
     require_once('loginController.php');
 
-    // require_once('../models');
-    // require_once('./views');
-
     class ProductsController{
         private $pModel;
         private $mModel;
@@ -31,7 +28,7 @@
         // }
 
         public function checkAdmin(){
-            session_start();
+            // session_start();
             return($this->user->isAdmin());
         }
 
@@ -109,6 +106,13 @@
                 &&isset($_POST['p_name'])){
                     $pId = $_POST['p_selected'];
                     $newName = $_POST['p_name'];
+                    $productFound = $this->pModel->findProductById($pId);
+                    if($productFound->nombre == $newName && $productFound->id_producto != $pId){
+                        // This is to avoid repeated names of
+                        // products
+                        header("Location: ".URL);
+                        die();
+                    }
                     $this->pModel->editProduct($pId, $newName);
                 }
             }
@@ -121,7 +125,10 @@
             if($this->checkAdmin()){
                 if(isset($_POST['p_name'])){
                     $newName = $_POST['p_name'];
-                    $this->pModel->addProduct($newName);
+                    $product = $this->pModel->findProduct($newName);
+                    if($product == null){
+                        $this->pModel->addProduct($newName);
+                    }
                 }
             }
             header("Location: ".URL);

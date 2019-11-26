@@ -41,6 +41,17 @@
             return $response;
         }
 
+        public function findProductById($p_id){
+            $ask = $this->model->prepare('SELECT * FROM producto WHERE id_producto = ?');
+            $ok = $ask->execute(array($p_id));
+            if(!$ok){
+                var_dump($ask->errorInfo());
+                die();
+            }
+            $response = $ask->fetch(PDO::FETCH_OBJ);
+            return $response;
+        }
+
         public function getProduct($product){
             // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // $ask = $this->model->prepare('SELECT producto.nombre, modelo.nombre_m, modelo.descripcion FROM producto JOIN modelo ON producto.id_producto = ?');
