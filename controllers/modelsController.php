@@ -52,7 +52,7 @@
             $mod = $params[':MODEL'];
             $prodName = $params[':PRODUCT'];
             $selectedModel = $this->model->getModel($mod);
-            if($selectedModel!=null){
+            if($selectedModel != null){
                 $this->view->showModel($selectedModel, $prodName,
                 $this->user->isAdmin());
                 // Views must know who the user is.
@@ -85,9 +85,16 @@
                 ||$_FILES['m_photo']['type']=='image/jpg'
                 ||$_FILES['m_photo']['type']=='image/png')) {
                     $comparable = $this->model->getModel($_POST['m_name']);
+                    // var_dump($comparable);
                     if($comparable != null){
-                        header("Location: ". URL);
+                        // var_dump("is");die;
+                        // header("Loocation: ".URL."/error1");
+                        // $this->showError(1);
+                        header("Location: ".URL."error");
                         die;
+                        // 1 means that model name already existed
+                        // header("Location: ". URL);
+                        // die;
                     }
                     // First change the name of the image,
                     // then save that image in the folder,
@@ -132,9 +139,13 @@
                     $comparable = $this->model->getModel($_POST['m_name']);
 
                     if($comparable != null && $comparable->id_modelo != $modId){
-                        // var_dump(URL.$prodName."/".modName);
-                        header("Location: ". URL.$prodName."/".$modName);
+                        // header("Loocation: ".URL.$prodName."/".$modName."/error1");
+                        $this->showError($modName, $prodName, 1);
+                        // header("Location: ".URL."error");
                         die;
+                        // 1 means that model name already existed 
+                        // header("Location: ". URL.$prodName."/".$modName);
+                        // die;
                     }
 
                     $photoParts = explode(".", $_FILES['m_photo']['name']);
@@ -183,6 +194,13 @@
             }
             header("Location: ".URL);
         }
+
+        public function showError($modName, $prodName, $error){
+            $selectedModel = $this->model->getModel($modName);
+            $adm = $this->user->isAdmin();
+            $this->view->showModel($selectedModel, $prodName, $adm, $error);
+        }
     }
+
 
     

@@ -83,6 +83,8 @@
 
             $r->setDefaultRoute("ProductsController", "commandProducts");
             
+            $r->addRoute("error", "GET", "ProductsController", "modelError");
+
             $r->addRoute("login", "GET", "LoginController", "commandShowLogin");
             $r->addRoute("signUp", "GET", "LoginController", "commandShowSignUp");
             $r->addRoute("tryLog", "POST", "LoginController", "logIn");

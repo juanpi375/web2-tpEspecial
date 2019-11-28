@@ -106,12 +106,22 @@
                 &&isset($_POST['p_name'])){
                     $pId = $_POST['p_selected'];
                     $newName = $_POST['p_name'];
-                    $productFound = $this->pModel->findProductById($pId);
-                    if($productFound->nombre == $newName && $productFound->id_producto != $pId){
+                    // $productFound = $this->pModel->findProductById($pId);
+                    $possibleCoincidence = $this->pModel->findProduct($newName);
+                    // var_dump($possibleCoincidence->id_producto);
+                    // var_dump($productFound->nombre);
+                    // var_dump($newName);
+                    // var_dump($pId);
+                    // die();
+                    if($possibleCoincidence != null && $pId != $possibleCoincidence->id_producto){
+                    // if($productFound->nombre == $newName && $pId != $possibleCoincidence->id_producto){
                         // This is to avoid repeated names of
                         // products
-                        header("Location: ".URL);
-                        die();
+                        // header("Location: ".URL);
+                        // die();
+                        $this->showError(2);
+                        die;
+                        // 2 means the product name already existed
                     }
                     $this->pModel->editProduct($pId, $newName);
                 }
@@ -129,9 +139,16 @@
                     if($product == null){
                         $this->pModel->addProduct($newName);
                     }
+                    else{
+                    //     header("Location: ".URL."/error1");
+                    //     die();
+
+                        $this->showError(2);
+                        die;
+                    }
                 }
             }
-            header("Location: ".URL);
+            header("Location: ".URL);    
         }
 
         public function commandDelProduct($params = null){
@@ -142,5 +159,21 @@
             header("Location: ".URL);
         }
         
+
+        public function showError($error){
+            $products = $this->pModel->getProducts();
+            $models = $this->mModel->getModels();
+            $isAdmin = $this->checkAdmin();
+            // var_dump($erroree); die;
+            $this->view->showProducts($products, $models, $isAdmin, $error);
+        }
+
+        public function ModelError(){
+            $products = $this->pModel->getProducts();
+            $models = $this->mModel->getModels();
+            $isAdmin = $this->checkAdmin();
+            // var_dump($erroree); die;
+            $this->view->showProducts($products, $models, $isAdmin, 1);
+        }
     }
       

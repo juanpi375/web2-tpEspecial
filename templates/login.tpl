@@ -12,12 +12,14 @@
             <input type="submit" value="Ingresar">
         </div>
         {if $error==1}
-            <span style="border: 2px solid red; border-radius: 10px; padding: 5px; color: red">
+            {* <span style="border: 2px solid red; border-radius: 10px; padding: 5px; color: red"> *}
+            <span class="error-message">
                 Por favor ingrese un usuario y contraseña correctos
             </span>
         {/if}
         {if $error==2}
-            <span style="border: 2px solid red; border-radius: 10px; padding: 5px; color: red">
+            {* <span style="border: 2px solid red; border-radius: 10px; padding: 5px; color: red"> *}
+            <span class="error-message">
                 Por favor llene todos los campos
             </span>
         {/if}

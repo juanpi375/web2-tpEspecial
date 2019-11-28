@@ -1,3 +1,14 @@
+{if $error == 1}
+        <span class="error-message">
+            Ese nombre de modelo ya existe, por favor agregue uno nuevo
+        </span>
+{/if}
+{if $error == 2}
+    <span class="error-message">
+        Ese nombre de producto ya existe, por favor elija un nombre nuevo
+    </span>
+{/if}
+{* <h1>{{$error}}</h1> *}
 <form action="editProd" method="POST" class="main-forms">
     <h3>Seleccione un producto a editar..</h3>
     {* <h3>Editar </h3> *}

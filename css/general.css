@@ -98,6 +98,12 @@ footer{
 .products-list a{
     display: inline-block;
 }
+.error-message{
+    border: 2px solid red;
+    border-radius: 10px;
+    padding: 5px;
+    color: red;
+}
 .cross{
     box-sizing: border-box;
     background: #c00;

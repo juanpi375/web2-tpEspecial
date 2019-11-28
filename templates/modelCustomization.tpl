@@ -1,5 +1,11 @@
 <form action="{$URL}editModel/{$prodNombre}/{$mod->id_modelo}/{$mod->nombre_m}/{$mod->foto}" method="POST" enctype="multipart/form-data">
 
+    {if $error == 1}
+        <span class="error-message">
+            Ese nombre de modelo ya existe, por favor elija un nombre nuevo
+        </span>
+    {/if}
+
     <h3>Encuentra fallas en el modelo? Edítelo a continuación..</h3>
 
     <input type="text" name="m_name" id="M_name" placeholder="Nombre: ">
