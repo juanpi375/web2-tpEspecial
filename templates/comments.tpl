@@ -48,7 +48,7 @@
                 {literal} 
                     <form method="POST" id="comment-add"> 
                         <label for="comment-input">Comentario:</label>
-                        <input type="text" id="comment-input">
+                        <input type="text" id="comment-input" required>
                         <label for="comment-score">Puntaje:</label>
                         <select id="comment-score">
                             <option value="1">1</option>

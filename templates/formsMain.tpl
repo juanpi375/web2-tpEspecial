@@ -19,7 +19,7 @@
             </option>
         {/foreach}
     </select>
-    <input type="text" name="p_name" id="P_name" placeholder="Nombre: ">
+    <input type="text" name="p_name" id="P_name" placeholder="Nombre: " required>
     <input type="submit" value="Guardar">
 </form> 
 
@@ -28,7 +28,7 @@
 
 <form action="addProd" method="POST" class="main-forms">
     <h3>Agregar un nuevo producto..</h3>
-    <input type="text" name="p_name" id="P_name" placeholder="Nombre: ">
+    <input type="text" name="p_name" id="P_name" placeholder="Nombre: " required>
     <input type="submit" value="Agregar">
 </form>
 
@@ -50,13 +50,13 @@
         </select>
     </div>
     <div>
-        <input type="text" name="m_name" id="M_name" placeholder="Nombre: ">
+        <input type="text" name="m_name" id="M_name" placeholder="Nombre: " required>
     </div>
     <div>        
-        <input type="text" name="m_description" id="M_description" placeholder="Descripción: ">
+        <input type="text" name="m_description" id="M_description" placeholder="Descripción: " required>
     </div>
     <div>        
-        <input type="file" name="m_photo" id="M_photo" placeholder="Imágen: ">
+        <input type="file" name="m_photo" id="M_photo" placeholder="Imágen: " required>
     </div>
     <input type="submit" value="Agregar">
         {* If model name already existed *}
