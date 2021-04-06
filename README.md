@@ -1,5 +1,5 @@
 # ElectroCom
-### Electronical devices comparisson web page
+### Electronical devices web page to compare between models. Ratings and comments will help make up your mind!
 
 ## Topics involved:
 - Model View Controller pattern with Php
