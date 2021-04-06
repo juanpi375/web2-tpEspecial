@@ -19,7 +19,7 @@ will relieve you from having to create the database tables by yourself
 - Have fun with the marvels of programming!
 
 **Note:** The starting admin user is ***iamroot*** and its password is ***pass***.
-The other users are ... and their passwords are ***1234***
+The other users are **Kratos**, **Magnolia**, **Felipe**, **Ralph** and **Hermione**, and their passwords are ***1234***
 
 ## Actions in the page:
 ### The page allows the user to do actions according to their authorization levels
